@@ -1,39 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>One-Time Pad</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <link href="/static/css/style.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
 
-        $("#generate-string").click(function(e) {
-          $.post("/generator", {"length": $("input[name='length']").val()})
+        $("#retrieve").click(function(e) {
+          $.get("/retriever", {"code": $("input[name='code']").val()})
            .done(function(string) {
-            $("#the-string").show();
-            $("#the-string input").val(string);
+            $("#get-message input[name='output']").val(string);
           });
           e.preventDefault();
         });
 
-        $("#replace-string").click(function(e) {
-          $.ajax({
-            type: "PUT",
-            url: "/generator",
-            data: {"another_string": $("#the-string input").val()}
-          })
-          .done(function() {
-            alert("Replaced!");
-          });
-          e.preventDefault();
-        });
-
-        $("#delete-string").click(function(e) {
-          $.ajax({
-            type: "DELETE",
-            url: "/generator"
-          })
-          .done(function() {
-            $("#the-string").hide();
+        $("#enter-password").click(function(e) {
+          $.post("/retriever", {"code": $("input[name='password']").val(),"message": $("input[name='message']").val()})
+          .done(function(string) {
+            $("#send-message input[name='password']").val("");
+            $("#send-message input[name='message']").val("Message sent!");
           });
           e.preventDefault();
         });
@@ -42,12 +29,17 @@
     </script>
   </head>
   <body>
-    <input type="text" value="8" name="length"/>
-    <button id="generate-string">Give it now!</button>
-    <div id="the-string">
-      <input type="text" />
-      <button id="replace-string">Replace</button>
-      <button id="delete-string">Delete it</button>
+    <div id="get-message">
+      <input type="text" name="code"/>
+      <button id="retrieve">Retrieve</button>
+      <br>
+      <input type="text" name="output"/>
+    </div>
+    <br><br>
+    <div id="send-message">
+      <input type="text" name="password"/><button id="enter-password">Send</button>
+      <br>
+      <input type="text" name="message"/>
     </div>
   </body>
 </html>
