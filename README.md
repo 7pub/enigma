@@ -1,4 +1,4 @@
-# onetimepad
+# enigma
 *Built for Hack Western 4*
 ## What is this?
 A secure (untested) one-time pad webapp for communicating using pre-shared private keys.
