@@ -11,16 +11,16 @@
         $("#retrieve").click(function(e) {
           $.get("/retriever", {"code": $("input[name='code']").val()})
            .done(function(string) {
-            $("#get-message input[name='output']").val(string);
+            $("#get-message p").text(string);
           });
           e.preventDefault();
         });
 
         $("#enter-password").click(function(e) {
-          $.post("/retriever", {"code": $("input[name='password']").val(),"message": $("input[name='message']").val()})
+          $.post("/retriever", {"code": $("input[name='password']").val(),"message": $("textarea[name='message']").val()})
           .done(function(string) {
-            $("#send-message input[name='password']").val("");
-            $("#send-message input[name='message']").val("Message sent!");
+            $("#send-message input[name='password']").val('');
+            $("#send-message textarea").val('');
           });
           e.preventDefault();
         });
@@ -28,18 +28,30 @@
       });
     </script>
   </head>
+
   <body>
-    <div id="get-message">
-      <input type="text" name="code"/>
-      <button id="retrieve">Retrieve</button>
-      <br>
-      <input type="text" name="output"/>
-    </div>
-    <br><br>
-    <div id="send-message">
-      <input type="text" name="password"/><button id="enter-password">Send</button>
-      <br>
-      <input type="text" name="message"/>
-    </div>
+    <nav class="navbar navbar-dark navbar-fixed-top">
+      <a class="navbar-brand navbar-left" href="">onetimepad</a>
+    </nav>
+    <main role="main" class="container-fluid w-75">
+      <div id="get-message" class="col" style="padding: 15px;">
+        <div class="page-header">
+          <h1><small>Get a Message</small></h1>
+        </div>
+        <input class="form-control"  placeholder="Private key" type="text" class="form-control" name="code"/>
+        <p name="output" style="padding: 15px;"></p>
+        <br>
+        <button class="btn btn-primary" id="retrieve">Retrieve</button>
+      </div>
+      <div id="send-message" class="col" style="padding: 15px;">
+        <div class="page-header">
+          <h1><small>Send a Message</small></h1>
+        </div>
+        <input placeholder="Private key" type="text" class="form-control" name="password"/>
+        <textarea rows="6" placeholder="Message to send" type="text" class="form-control" name="message"/></textarea>
+        <br>
+        <button class="btn btn-primary" id="enter-password">Send</button>
+      </div>
+    </main>
   </body>
 </html>
