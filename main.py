@@ -7,6 +7,7 @@ import os
 from Crypto.Cipher import AES
 from Crypto import Random
 import base64
+#from google.appengine.ext.webapp.util import run_wsgi_app
 
 
 DB_STRING = "messages.db"
@@ -108,8 +109,7 @@ if __name__ == '__main__':
 
     cherrypy.engine.subscribe('start', setup_database)
     cherrypy.engine.subscribe('stop', cleanup_database)
-
-    webapp = StringGenerator()
-    webapp.retriever = StringGeneratorWebService()
+    app = StringGenerator()
+    app.retriever = StringGeneratorWebService()
     cherrypy.config.update({'server.socket_host': '0.0.0.0'})
-    cherrypy.quickstart(webapp, '/', conf)
+    cherrypy.quickstart(app, '/', conf)
