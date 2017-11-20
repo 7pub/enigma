@@ -1,5 +1,6 @@
 # enigma
-*Built for Hack Western 4*
+*Built for Hack Western 4, see it on [Devpost](https://devpost.com/software/onetimepad)*
+
 ## What is this?
 A secure (untested) one-time pad webapp for communicating using pre-shared private keys.
 
@@ -8,6 +9,9 @@ A secure (untested) one-time pad webapp for communicating using pre-shared priva
 - [CherryPy](http://cherrypy.org/)
 - [Bootstrap](https://getbootstrap.com/)
 - a lot of Googling and StackOverflow
+
+## Gallery
+
 
 ## To-Do
 - [ ] move the encryption and decryption client-side (a.k.a. learn JS) to prevent transmission of unencrypted data
