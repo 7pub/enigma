@@ -10,7 +10,7 @@
       $(document).ready(function() {
 
         $("#retrieve").click(function(e) {
-          $.get("/retriever", {"code": $("input[name='code']").val()})
+          $.get("/enigma/retriever", {"code": $("input[name='code']").val()})
            .done(function(string) {
             $("#get-message p").text(string);
           });
@@ -18,7 +18,7 @@
         });
 
         $("#enter-password").click(function(e) {
-          $.post("/retriever", {"code": $("input[name='password']").val(),"message": $("textarea[name='message']").val()})
+          $.post("/enigma/retriever", {"code": $("input[name='password']").val(),"message": $("textarea[name='message']").val()})
           .done(function(string) {
             $("#send-message input[name='password']").val('');
             $("#send-message textarea").val('');
